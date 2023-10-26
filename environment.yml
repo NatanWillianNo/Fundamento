@@ -1,0 +1,7 @@
+name: fundamento1
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  
