@@ -78,15 +78,17 @@ print('{} multiplicado por 8 é {}'.format(ex009, ex009*8))
 print('{} multiplicado por 9 é {}'.format(ex009, ex009*9))
 print('{} multiplicado por 10 é {}'.format(ex009, ex009*10))
 # Crie um programa que leia quanto dinheiro uma pessoa tem na carteira e mostre quantos dólares ela pode comprar.
-carteira_str = input('Quantos reais você tem na carteira?: R$ ')
+print("Vamos converter seu dinheiro de reais para dólares")
+carteira_str = input('Quantos reais você tem na carteira? R$ ')
 carteira_str = carteira_str.replace(',', '.')
 carteira = float(carteira_str)
-usd_str = input('Quantos está custando o dólar hoje?: US$ ')
+usd_str = input('Quantos está custando o dólar hoje? US$ ')
 usd_str = usd_str.replace(',', '.')
 usd = float(usd_str)
 conv = carteira / usd
 print('Você tem R${:.2f}, isso é equivalente a US${:.2f}'.format(carteira, conv))
 # Faça um programa que leia a largura e a altura de uma parede em metros, calcule a sua área e a quantidade de tinta necessária para pintá-la, sabendo que cada litro de tinta pinta uma área de 2 metros quadrados.
+print('Vamos calcular a quantidade de tinta necessária para pintar uma parede')
 larg = float(input('Coloque a largura da parede em metros: '))
 alt = float(input('Coloque a altura da parede em metros: '))
 area = larg * alt
@@ -94,8 +96,28 @@ litros_por_metro_quadrado = float(input('Coloque a quantidade de tinta por metro
 tinta_necessaria = area / litros_por_metro_quadrado
 print('Sabendo que a área da parede equivale a {:.2f} metros quadrados, será necessário utilizar {:.2f} litros de tinta'.format(area, tinta_necessaria))
 # Faça um algoritmo que leia o preço de um produto e mostre seu novo preço, com 5% de desconto.
+print("Vamos calcular o novo preço do produto com desconto")
 prod = input('Qual é o produto que você quer analisar?: ')
 preço = float(input('Qual é o preço do produto?: '))
 desc = float(input('Qual é o desconto do produto?: '))
 preçodesc = preço*(desc/100)+preço
 print('{} custava {:.2f} antes do desconto de {:.2f}%, agora custa {:.2f}'.format(produto, preço, desc, preçodesc))
+#Faça um algoritmo que leia o salário de um funcionário e mostre seu novo salário, com 15% de aumento.
+print("Vamos calcular o novo salário com um reajuste percentual")
+sal = float(input('Qual é o seu salário? R$ '  ))
+reajust = float(input('Qual é o reajuste percentual do seu salário? '))
+aum = (sal*reajust/100)+sal
+print('Devido ao aumento do seu salário que era R${:.2f} em {:.2f}%, seu salário atual é R${:.2f}'.format(sal, reajust, aum))
+# Escreva um programa que converta uma temperatura digitando em graus Celsius e converta para graus Fahrenheit.
+print('Vamos converter temperatura de graus Celsius para Fahrenheit')
+cels = float(input('Qual é a temperatura em Celsius? °C '))
+fahren = (cels * 9 / 5) + 32
+print('A temperatura de {} graus Celsius é igual a {} graus Fahrenheit'.format(cels, fahren))
+#Escreva um programa que pergunte a quantidade de Km percorridos por um carro alugado e a quantidade de dias pelos quais ele foi alugado. Calcule o preço a pagar, sabendo que o carro custa R$60 por dia e R$0,15 por Km rodado.
+print("Este programa calcula o preço a pagar pelo aluguel de um carro.")
+kilomt = float(input('Insira quantos kilômetros você andou com o carro?: '))
+preckm = float(input('Insira o valor por kilômetro do carro escolhido?: '))
+dias = int(input('Insira quantos dias você usou o carro?: ')
+precdias = float(input('Insira o valor por dia: '))
+valortotcar = (precdias*dias) + (kilomt*preckm)
+print('Sabendo que o carro foi alugado por {} dias e andou {} km, e o valor por dia é R${} e por quilômetro rodado é R${}. O valor total do aluguel ficou R${:.2f}'.format(dias_aluguel, quilometros_rodados, valor_por_dia, valor_por_km, valor_total))
