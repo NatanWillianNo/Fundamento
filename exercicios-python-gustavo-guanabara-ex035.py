@@ -75,6 +75,7 @@ novo_salario = salario + aumento
 print(f"Salário antes do aumento: R${salario:.2f}")
 print(f"Valor do aumento: R${aumento:.2f}")
 print(f"Novo salário após o aumento: R${novo_salario:.2f}")
+
 # Desenvolva um programa que leia o comprimento de três retas e diga ao usuário se elas podem ou não formar um triângulo.
 print("Verificador de Triângulo")
 print('Lembrando que a Condição de existência de um triângulo é')
