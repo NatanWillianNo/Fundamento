@@ -1,0 +1,500 @@
+            >>>>Anotações Python<<<<
+
+>> print()
+- Esse comando serve para escrever algo com variável ou
+informar esse algo diretamente nos parâmetros.
+
+- No caso de letras, precisamos do uso de aspas simples ou
+duplas. Lembrando, caso deseje declarar (criar) uma
+variável e querer associar algum dado a ela, use o sinal
+de igual (=). Na programação, esse sinal é lido como "recebe,"
+e o sinal de igual é composto por dois iguais, assim, ==.
+
+* Exemplo:
+Com variável:
+
+frase = 'Bom dia'
+print(frase)
+
+Resultado:
+Bom dia
+
+Diretamente:
+print('Bom dia')
+
+Resultado:
+Bom dia
+
+>> input()
+Serve para introduzir dados a uma variável.
+Bem semelhante ao print(), é possível colocar
+mensagens no nosso input (prompt), e esse nome
+"prompt" é onde colocamos essa mensagem, mas
+ela tem que estar entre aspas também.
+
+- Basicamente, para entender um pouco as aspas,
+os caracteres tipo letras e símbolos necessitam
+estar entre aspas. Assim o Python trata as
+caracteres que, quando colocadas entre aspas, recebem
+o tipo primitivo "str." Mas não se preocupe com isso
+agora; na aula 006, você irá entender melhor. Fique
+tranquilo, mas fique com essa breve introdução.
+
+* Exemplo:
+n = input('Digite uma frase: ')
+print(n)
+
+Resultado:
+Digite uma frase: Bom dia
+Bom dia
+
+         >>>Tipos primitivos<<<
+                    >>>006<<<
+
+- Os tipos primitivos são basicamente para converter dados
+de acordo com suas necessidades.
+Na nosso caso, a nossa necessidade é somar dois números,
+mas quando fazemos tais execuções em nossos programas
+usando tudo que sabemos no momento, acontece isso.
+
+- Analise o programa abaixo.
+
+n1 = input('Número 1: ')
+n2 = input('Número 2: ')
+
+print(n1 + n2)
+
+Resultado:
+
+Número 1: 3
+Número 2: 6
+36
+
+- Quando executado, nenhum erro acontece, mas não aparece o que
+esperávamos, que é a soma. Se informarmos os valores 3 e 6
+invés de somar, ele junta. Isso se chama concatenação.
+
+>> Concatenação:
+Junção de string, o Python não
+reconhece esses dados como números,
+mas como string, e string + string == stringstring.
+
+- Bem, queremos somar esses valores, e precisamos convertê-los.
+E aqui entra os tipos primitivos.
+
+>> int()
+Significa inteiro (número inteiro). Os números inteiros
+são -3, -2, -1, 0, 1, 2, 3.
+
+>> float()
+Significa números reais, que são números com ponto flutuante
+ou números quebrados -3.1, -2.0, -0.5, 0.0, 1.4, 3.5, 1000.0.
+
+>> str()
+Serve para caracteres em geral. No Python, tudo entre
+aspas é str, mesmo se for número. Entre '' TUDO é str.
+
+>> bool()
+Serve basicamente para checar se existe algum dado. Se tiver,
+devolve True; se não, False.
+
+- Basicamente, eles servem para informarmos ao Python
+qual o tipo primitivo daqueles dados que informamos
+anteriormente.
+
+- Agora vamos usar os tipos primitivos, de acordo com nossas
+necessidades, que pode ser o float ou int neste caso.
+
+n1 = int(input('Número 1: '))
+n2 = int(input('Número 2: '))
+
+print(n1 + n2)
+
+Resultado:
+
+Número 1: 3
+Número 2: 6
+9
+
+- É possível apresentar os dados com o print de uma forma mais
+bonita e que irá ajudar muito lá na frente.
+Digamos que no exemplo anterior queremos que apareça uma
+mensagem tipo "A soma entre 3 e 6 vale 9" no nosso print.
+Parece difícil, mas acredite, é simples.
+Para fazermos isso, vamos usar f'' que significa f-strings
+dentro do nosso print dessa forma, print(f''). Em
+seguida, usar máscaras (chaves) e introduzir as nossas
+variáveis.
+
+- Analise o exemplo abaixo.
+
+n1 = int(input('Número 1: '))
+n2 = int(input('Número 2: '))
+
+print(f'A soma entre {n1} e {n2} vale {n1 + n2}')
+
+Resultado:
+Número 1: 3
+Número 2: 6
+
+A soma entre 3 e 6 vale 9
+
+>> type()
+Caso queira checar o tipo primitivo, use o type() e informe
+no parâmetro o que você quer checar, como variável.
+
+* Exemplo:
+n1 = input('Digite: ')
+print(type(n1))
+
+Resultado:
+Digite: 4
+<class 'str'>
+
+# Significa que é da classe string.
+
+* Exemplo 2:
+n1 = int(input('Digite: '))
+print(type(n1))
+
+Resultado:
+Digite: 9
+<class 'int'>
+
+# Significa que é da classe inteira.
+
+>> Comandos is <<
+Serve para checar se os valores são algo como números, letras
+alfanuméricos, etc.
+
+>> isnumeric()
+Serve para checar se os valores são números ou não.
+Se for, devolverá True; se não, False.
+
+>> isalpha()
+Serve para checar se são letras.
+
+>> isalnum()
+Serve para checar se são alfanuméricos.
+
+>> isupper()
+Serve para checar se são todas letras maiúsculas.
+
+>> islower()
+Serve para checar se são todas letras minúsculas.
+
+>> istitle()
+Serve para checar se é um título.
+
+>> iscapitalize()
+Serve para checar se a inicial está capitalizada (maiúscula).
+
+>> isspace()
+Serve para checar se possui apenas espaçamento.
+
+* Exemplo que serve para testar com todos,
+usarei o primeiro comando para o exemplo.
+
+n = input('Digite algo: ')
+print(n.isnumeric())
+
+Resultado:
+Digite algo: 7
+True
+
+# Nesse caso significa que é número.
+
+* Exemplo 2:
+n = input('Digite algo: ')
+print(n.isnumeric())
+
+Resultado:
+Digite algo: olá
+False
+
+# E nesse que o valor não é um número.
+
+        >>>Operadores aritméticos<<<
+                      >>>007<<<
+
+- Nos nossos programas, vamos utilizar cálculos, mas não são cálculos
+complexos. Basicamente, não precisa de muita matemática para fazê-los.
+E para cada cálculo que nós desejarmos efetuar, o Python possui
+caracteres que fazem isso para a gente.
+
+Adição: +
+5 + 2 == 7
+
+Subtração: -
+5 - 2 == 3
+
+Multiplicação: *
+5 * 2 == 10
+
+Potência: ** ou pow(x, y)
+5 ** 2 == 25
+
+Divisão: /
+5 / 2 == 2.5
+
+Divisão inteira: //
+5 // 2 == 2
+
+Resto da divisão: %
+5 % 2 == 1
+
+>> Ordem de precedência <<
+Isso é muito importante em nossos programas,
+serve para sabermos quais operações vão ser realizadas
+primeiro, parecido com as expressões numéricas, só que
+mais fácil de entender.
+
+1 - ()
+2 - **
+3 - *, \\, /, %
+4 - + e -
+
+* Exemplo:
+
+3 + 5 * 2 ** 2
+
+Qual a resposta desse cálculo, siga a ordem de precedência.
+
+Vale 23 porque primeiro potência 2 ** 2 == 4, em seguida
+multiplicação 5 * 4 == 20 e por fim soma de 3 + 20 = 23.
+
+-Caso encontre em um cálculo a ordem 3 ou 4 no mesmo,
+resolva quem vem primeiro.
+
+Exemplo 2:
+
+20 / 5 * 2 ** 2
+
+Primeiro resolva a potência 2 ** 2 == 4, 20 / 5 == 4, por
+último 4 * 4 == 16.
+
+Exemplo 3:
+
+(5 * 2) ** 2 / 20
+
+Primeiro resolva os parênteses (5 * 2) == 10, 10 ** 2 == 100
+e por último 100 / 20 == 5.
+
+- Bem, é possível diminuir as casas decimais de um resultado (produto)
+de uma divisão.
+
+No exemplo abaixo, você verá que o resultado possui muitas casas
+decimais.
+
+n1 = int(input('Número 1: '))
+n2 = int(input('Número 2: '))
+
+print(f'{n1} / {n2} == {n1 / n2}')
+
+Resultado:
+Número 1: 4
+Número 2: 3
+4 / 3 == 1.3333333333333333
+
+- Para diminuir essas casas, necessitamos formatá-las na máscara.
+
+n1 = int(input('Número 1: '))
+n2 = int(input('Número 2: '))
+
+print(f'{n1} / {n2} == {n1 / n2:.2f}')
+
+# {n1 / n2:.2f} isso significa que n1 / n2 nas suas casas decimais
+averá apenas 2 números.
+
+Resultado:
+Número 1: 4
+Número 2: 3
+4 / 3 == 1.33
+
+- Retomando ao print()
+É possível fazer algumas coisas que irão ajudar você na frente,
+juntando print() e quebrando suas linhas.
+
+>> end=''
+Serve para juntar print() com outro.
+
+* Exemplo:
+print('Bom', end=' ')
+print('dia')
+
+Resultado:
+Bom dia
+
+>> \n
+Serve para quebrarmos um print() em qualquer lugar.
+
+* Exemplo:
+print('Bom dia\nBoa noite')
+
+Resultado:
+Bom dia
+Boa noite
+
+O texto fornecido trata de conceitos importantes em programação, como tipos primitivos, operadores aritméticos e o uso de módulos em Python. Aqui estão algumas correções e melhorias para o texto:
+
+### Tipos Primitivos (006)
+
+Os tipos primitivos são essenciais para converter dados de acordo com nossas necessidades. No entanto, ao realizar operações sem conversão adequada, podemos enfrentar problemas de concatenação em vez de adição. Por exemplo:
+
+```python
+n1 = input('Número 1: ')
+n2 = input('Número 2: ')
+
+print(n1 + n2)
+```
+
+Ao executar esse código com entradas 3 e 6, o resultado será 36 devido à concatenação, não à soma.
+
+#### Concatenação:
+A junção de strings ocorre quando o Python reconhece os dados como strings em vez de números. Para corrigir isso, podemos usar os tipos primitivos `int()` ou `float()` para converter os dados adequadamente.
+
+```python
+n1 = int(input('Número 1: '))
+n2 = int(input('Número 2: '))
+
+print(n1 + n2)
+```
+
+Agora, ao fornecer 3 e 6 como entradas, obteremos o resultado esperado: 9.O texto fornecido trata de conceitos importantes em programação, como tipos primitivos, operadores aritméticos e o uso de módulos em Python. Aqui estão algumas correções e melhorias para o texto:
+
+### Tipos Primitivos (006)
+
+Os tipos primitivos são essenciais para converter dados de acordo com nossas necessidades. No entanto, ao realizar operações sem conversão adequada, podemos enfrentar problemas de concatenação em vez de adição. Por exemplo:
+
+```python
+n1 = input('Número 1: ')
+n2 = input('Número 2: ')
+
+print(n1 + n2)
+```
+
+Ao executar esse código com entradas 3 e 6, o resultado será 36 devido à concatenação, não à soma.
+
+#### Concatenação:
+A junção de strings ocorre quando o Python reconhece os dados como strings em vez de números. Para corrigir isso, podemos usar os tipos primitivos `int()` ou `float()` para converter os dados adequadamente.
+
+```python
+n1 = int(input('Número 1: '))
+n2 = int(input('Número 2: '))
+
+print(n1 + n2)
+```
+
+Agora, ao fornecer 3 e 6 como entradas, obteremos o resultado esperado: 9.
+
+Além disso, podemos melhorar a apresentação usando f-strings para tornar o output mais legível:
+
+```python
+n1 = int(input('Número 1: '))
+n2 = int(input('Número 2: '))
+
+print(f'A soma entre {n1} e {n2} vale {n1 + n2}')
+```
+
+### Comandos `is` e Operadores Aritméticos (007)
+
+Introduzindo comandos `is` para verificar características dos dados:
+
+```python
+text = input('Digite algo: ')
+print(text.isnumeric())  # Verifica se é numérico
+```
+
+Operadores aritméticos:
+
+```python
+result = 5 + 2  # Adição
+result = 5 - 2  # Subtração
+result = 5 * 2  # Multiplicação
+result = 5 ** 2  # Potência
+result = 5 / 2  # Divisão
+result = 5 // 2  # Divisão inteira
+result = 5 % 2  # Resto da divisão
+```
+
+A ordem de precedência é crucial para avaliar expressões, e ela segue a lógica matemática padrão.
+
+### Utilizando Módulos (008)
+
+A utilização de módulos, como `math` e `random`, pode enriquecer nossos programas.
+
+Exemplo com `math`:
+
+```python
+from math import sqrt
+
+print(sqrt(81))  # Saída: 9
+```
+
+Exemplo com `random`:
+
+```python
+from random import randint, shuffle, choice
+
+numbers = list(range(1, 6))  # Cria uma lista de 1 a 5
+shuffle(numbers)  # Embaralha a lista
+print(numbers)  # Exibe a lista embaralhada
+
+print(choice(numbers))  # Escolhe aleatoriamente um item da lista
+```
+
+Lembre-se de utilizar a função `help()` para obter informações sobre módulos e funções disponíveis.
+
+Essas correções e adições buscam aprimorar a clareza e correção do texto.
+```
+
+### Comandos `is` e Operadores Aritméticos (007)
+
+Introduzindo comandos `is` para verificar características dos dados:
+
+```python
+text = input('Digite algo: ')
+print(text.isnumeric())  # Verifica se é numérico
+```
+
+Operadores aritméticos:
+
+```python
+result = 5 + 2  # Adição
+result = 5 - 2  # Subtração
+result = 5 * 2  # Multiplicação
+result = 5 ** 2  # Potência
+result = 5 / 2  # Divisão
+result = 5 // 2  # Divisão inteira
+result = 5 % 2  # Resto da divisão
+```
+
+A ordem de precedência é crucial para avaliar expressões, e ela segue a lógica matemática padrão.
+
+### Utilizando Módulos (008)
+
+A utilização de módulos, como `math` e `random`, pode enriquecer nossos programas.
+
+Exemplo com `math`:
+
+```python
+from math import sqrt
+
+print(sqrt(81))  # Saída: 9
+```
+
+Exemplo com `random`:
+
+```python
+from random import randint, shuffle, choice
+
+numbers = list(range(1, 6))  # Cria uma lista de 1 a 5
+shuffle(numbers)  # Embaralha a lista
+print(numbers)  # Exibe a lista embaralhada
+
+print(choice(numbers))  # Escolhe aleatoriamente um item da lista
+```
+
+Lembre-se de utilizar a função `help()` para obter informações sobre módulos e funções disponíveis.
+
+Essas correções e adições buscam aprimorar a clareza e correção do texto.

@@ -1,0 +1,42 @@
+
+1. **if...elif...else:**
+   - O `if` é usado para testar uma condição. Se a condição for verdadeira, o bloco de código dentro do `if` é executado.
+   - O `elif` (abreviação de "else if") permite testar múltiplas condições, em sequência, caso a condição no `if` seja falsa.
+   - O `else` é executado se nenhuma das condições no `if` ou `elif` for verdadeira.
+
+   Exemplo em Python:
+   ```python
+   idade = 18
+
+   if idade < 18:
+       print("Menor de idade")
+   elif idade == 18:
+       print("Tem 18 anos")
+   else:
+       print("Maior de idade")
+   ```
+
+2. **for:**
+   - O loop `for` é utilizado para iterar sobre uma sequência (como uma lista, tupla, string) ou outros tipos de iteráveis.
+   
+   Exemplo em Python:
+   ```python
+   for i in range(5):
+       print(i)
+   ```
+   Este loop imprimirá os números de 0 a 4.
+
+3. **while:**
+   - O loop `while` é utilizado para repetir um bloco de código enquanto uma condição for verdadeira.
+   
+   Exemplo em Python:
+   ```python
+   contador = 0
+
+   while contador < 5:
+       print(contador)
+       contador += 1
+   ```
+   Este loop imprimirá os números de 0 a 4, semelhante ao exemplo com o loop `for`.
+
+Essas estruturas de controle são fundamentais para controlar o fluxo do seu programa, permitindo que você tome decisões e execute ações repetitivas com base em certas condições.
