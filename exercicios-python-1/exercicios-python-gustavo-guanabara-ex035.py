@@ -87,13 +87,7 @@ modulo_ab = abs((ladoa - ladob))
 modulo_ac = abs((ladoa - ladoc))
 modulo_bc = abs((ladob - ladoc))
 if ladoa < ladob + ladoc and ladob < ladoa + ladoc and ladoc < ladoa + ladob:
-    print('Os valores fornecidos formam um triângulo.')
-    if ladoa == ladob == ladoc:
-        print('Este é um triângulo equilátero.')
-    elif ladoa == ladob or ladoa == ladoc or ladob == ladoc:
-        print('Este é um triângulo isósceles.')
-    else:
-        print('Este é um triângulo escaleno.')
+  print('Os valores fornecidos formam um triângulo')
 else:
     print('Os valores fornecidos não formam um triângulo.')
 
