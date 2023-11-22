@@ -105,7 +105,7 @@ total = 0
 cont = 0
 produtos_mais_caros = []
 nome_do_produto_mais_barato = ""
-preco_do_produto_mais_barato = float('inf')  # Inicializa com um valor infinitamente alto
+preco_do_produto_mais_barato = float('inf')  
 while True:
     nome = input("Insira o nome do produto (ou pressione Enter para encerrar): ")
     if nome == "":
@@ -122,3 +122,23 @@ print("\n=== Resultados ===")
 print("A) Total Gasto: R${:.2f}".format(total))
 print("B) Produtos Mais Caros: {}".format(produtos_mais_caros))
 print("C) Nome do Produto Mais Barato: {}".format(nome_do_produto_mais_barato))
+
+# Crie um programa que simule o funcionamento de um caixa eletrônico. 
+# No início, pergunte ao usuário qual será o valor a ser sacado (número inteiro) 
+# e o programa vai informar quantas cédulas de cada valor serão entregues.
+# OBS: considere que o caixa possui cédulas de R$50, R$20, R$10 e R$1.
+# Solicita ao usuário o valor a ser sacado
+valor_saque = int(input("Digite o valor que deseja sacar: R$ "))
+while valor_saque <= 0:
+    print("Por favor, insira um valor válido.")
+    valor_saque = int(input("Digite o valor que deseja sacar: R$"))
+cedulas_disponiveis = [50, 20, 10, 2]
+quantidade_cedulas = {}
+for cedula in cedulas_disponiveis:
+    quantidade = valor_saque // cedula
+    if quantidade > 0:
+        quantidade_cedulas[cedula] = quantidade
+        valor_saque %= cedula
+print("Quantidade de cédulas a serem entregues:")
+for cedula, quantidade in quantidade_cedulas.items():
+    print(f"R${cedula}: {quantidade} cédulas")
