@@ -41,7 +41,7 @@ print('O time Chapecoense está na posição: {}'.format(posicao_chapecoense))
 # Depois disso, mostre a listagem de números gerados e também indique o menor e o maior valor que estão na tupla.
 
 import random
-numeros_aleatorios = tuple(random.sample(range(1, 101), 5))
+numeros_aleatorios = tuple(random.sample(range(0, 999), 5))
 print('Números gerados:', numeros_aleatorios)
 menor_valor = min(numeros_aleatorios)
 maior_valor = max(numeros_aleatorios)
