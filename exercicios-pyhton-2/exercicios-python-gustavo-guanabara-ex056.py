@@ -93,6 +93,7 @@ print('O número total de maiores de idade nesse grupo é: {}'.format(maior18))
 print('O número total de menores de idade nesse grupo é: {}'.format(menor18))
 
 # Faça um programa que leia o peso de cinco pessoas. 
+# No final, mostre qual foi o maior e o menor peso lidos.
 peso = float(input('Digite o peso da pessoa 1: '))
 maior_peso = peso
 menor_peso = peso
@@ -104,6 +105,7 @@ for i in range(2, 6):
         menor_peso = peso
 print('\nO maior peso lido foi: {:.2f} kg'.format(maior_peso))
 print('O menor peso lido foi: {:.2f} kg'.format(menor_peso))
+
 # Desenvolva um programa que leia o nome, idade e sexo de 4 pessoas. 
 # No final do programa, mostre: a média de idade do grupo, qual é o nome do homem mais velho e quantas mulheres têm menos de 20 anos.
 # Inicialize variáveis para a soma da idade, nome do homem mais velho e contador de mulheres menores de 20 anos

@@ -120,3 +120,6 @@ if not pilha:
     print('Os parênteses estão balanceados!')
 else:
     print('Os parênteses não estão balanceados!')
+
+
+    
