@@ -114,7 +114,7 @@ elif mes in meses_com_30_dias and not (1 <= dia <= 30):
     print('Data inválida')
 else:
     print('Data válida')
-print('{}/{};{}'.format(dia, mes, ano))
+print('{}/{}/{}'.format(dia, mes, ano))
 
 # Faça um programa para o cálculo de uma folha de pagamento, 
 # Sabendo que os descontos são do Imposto de Renda, que depende do salário bruto (conforme tabela abaixo) 
@@ -215,3 +215,54 @@ time.sleep(1)
 print('Processando pontuação...')
 time.sleep(1)
 print(f'\nA pontuação total foi: {pontuação_total} pontos.')
+
+# Faça um programa que calcule produtos notavéis: 
+# Quadrado da Soma = (x + y)²
+# Quadrado da Diferença = (x - y)²
+# Produto da soma pela diferença = (x + y)(x – y)
+# Cubo da Soma = (x + y)³
+# Cubo da Diferença = (x - y)³
+from time import sleep
+from sympy import symbols, expand
+
+tipo_incognitas_x = input("Deseja inserir a primeira incógnita como número (float) ou como símbolo (str)? ").lower()
+tipo_incognitas_y = input("Deseja inserir a segunda incógnita como número (float) ou como símbolo (str)? ").lower()
+
+if tipo_incognitas_x == 'float':
+    x = symbols('x')
+else:
+    x = float(input("Digite o valor de x: "))
+
+if tipo_incognitas_y == 'float':
+    y = symbols('y')
+else:
+    y = float(input("Digite o valor de y: "))
+
+print('-' * 40)
+print('Menu de Opções')
+print('-' * 40)
+print('1 - Quadrado da Soma (x + y)²')
+print('2 - Quadrado da Diferença (x - y)²')
+print('3 - Produto da soma pela diferença = (x + y)(x – y)')
+print('4 - Cubo da Soma = (x + y)³')
+print('5 - Cubo da Diferença = (x - y)³')
+
+opcao = int(input("Escolha uma opção (1 a 5): "))
+
+if opcao == 1:
+    resultado = expand((x + y) ** 2)
+    print(f"Resultado: ({x} + {y})² = {resultado}")
+elif opcao == 2:
+    resultado = expand((x - y) ** 2)
+    print(f"Resultado: ({x} - {y})² = {resultado}")
+elif opcao == 3:
+    resultado = expand((x + y) * (x - y))
+    print(f"Resultado: ({x} + {y})({x} – {y}) = {resultado}")
+elif opcao == 4:
+    resultado = expand((x + y) ** 3)
+    print(f"Resultado: ({x} + {y})³ = {resultado}")
+elif opcao == 5:
+    resultado = expand((x - y) ** 3)
+    print(f"Resultado: ({x} - {y})³ = {resultado}")
+else:
+    print("Opção inválida. Por favor, escolha uma opção de 1 a 5.")
