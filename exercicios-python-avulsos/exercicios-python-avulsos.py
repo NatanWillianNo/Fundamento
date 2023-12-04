@@ -164,3 +164,54 @@ print(f"(-) INSS (10%)                  : R$ {inss:.2f}")
 print(f"FGTS (11%)                      : R$ {fgts:.2f}")
 print(f"Total de descontos              : R$ {total_descontos:.2f}")
 print(f"Salário Liquido                 : R$ {salario_liquido:.2f}")
+
+# Escreva um programa que retorne os pontos obtidos em um jogo de Dardos.
+import random
+import time
+
+print('=== Jogo de Dardos ===')
+print('Vamos jogar um jogo?')
+print('Qual é o seu nome?')
+user = str(input(''))
+time.sleep(1)
+print('Seja bem-vindo(a) {}'.format(user))
+
+time.sleep(1)
+print('\nTutorial:')
+print(' - Na mosca: Acertar exatamente o número alvo ganha 10 pontos.')
+print(' - Muito perto: Acertar a até 4 unidades do número alvo ganha pontos equivalentes à proximidade.')
+print(' - Perto: Acertar de 5 a 8 unidades do número alvo ganha pontos equivalentes à proximidade.')
+print(' - Longe: Não acertar ganha 0 pontos.')
+
+pontuação_total = 0
+
+for lançamento in range(1, 6):
+    alvo = random.randint(0, 10)
+
+    tiro = int(input(f'\nLançamento {lançamento}: Escolha um número de 0 a 10: '))
+    pontos = abs(alvo - tiro)
+
+    if pontos == 0:
+        print(f'Na mosca! Você ganhou 10 pontos.')
+        pontuação_total += 10
+    elif pontos <= 4:
+        print(f'Muito perto! Você ganhou {10 - pontos} pontos!')
+        pontuação_total += (10 - pontos)
+    elif pontos <= 8:
+        print(f'Perto! Você ganhou {5 - (pontos - 5)} pontos!')
+        pontuação_total += (5 - (pontos - 5))
+    else:
+        print(f'Longe! Você não ganhou pontos desta vez.')
+
+    print(f'O número alvo era: {alvo}')
+
+time.sleep(1)
+print('Processando pontuação...')
+time.sleep(1)
+print('Processando pontuação...')
+time.sleep(1)
+print('Processando pontuação...')
+time.sleep(1)
+print('Processando pontuação...')
+time.sleep(1)
+print(f'\nA pontuação total foi: {pontuação_total} pontos.')
