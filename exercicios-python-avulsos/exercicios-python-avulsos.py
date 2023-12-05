@@ -266,3 +266,19 @@ elif opcao == 5:
     print(f"Resultado: ({x} - {y})³ = {resultado}")
 else:
     print("Opção inválida. Por favor, escolha uma opção de 1 a 5.")
+
+'''
+Dado o escore de alergia de uma pessoa, determine se ela é ou não alérgica a um item específico e liste todas as alergias que ela possui.
+Um teste de alergia gera um único escore numérico que contém informações sobre todas as alergias que a pessoa tem (para as quais foram testadas).
+A lista de itens (e seus valores) que foram testados é a seguinte:
+- ovos
+- amendoins (2)
+- frutos do mar (4)
+- morangos (8)
+- tomates (16)
+- chocolate (32)
+- pólen (64)
+- gatos (128)
+O programa deve ser capaz de dizer:
+Se Tom é alérgico a algum dos alérgenos listados acima e Todas as alergias às quais Tom é alérgico.
+'''

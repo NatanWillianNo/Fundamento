@@ -6,4 +6,7 @@ dependencies:
   - python
   - pygame
   - sympy
-  
+  - tinydb
+  - python-dotenv
+  - requests
+  - beautifulsoup4
