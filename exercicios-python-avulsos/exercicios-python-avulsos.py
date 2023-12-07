@@ -280,5 +280,66 @@ A lista de itens (e seus valores) que foram testados é a seguinte:
 - pólen (64)
 - gatos (128)
 O programa deve ser capaz de dizer:
-Se Tom é alérgico a algum dos alérgenos listados acima e Todas as alergias às quais Tom é alérgico.
+Se usuário é alérgico a algum dos alérgenos listados acima e Todas as alergias às quais o usuário é alérgico. 
+E um score que mostra o quão alérgico o usuário é
 '''
+
+print('-'*50)
+print('=== Diagnóstico de Alergias ===')
+print('-'*50)
+print("Pontuação possível:\n- Baixo nível de alergia: 1-4\n- Médio nível de alergia: 5-32\n- Alto nível de alergia: 33-64\n- Muito alto nível de alergia: 65 ou mais")
+print('-'*50)
+
+score = 0
+alergias = []
+
+while True:
+    print('- ovos (1)\n- amendoins (2)\n- frutos do mar (4)\n- morangos (8)\n- tomates (16)\n- chocolate (32)\n- pólen (64)\n- gatos (128)')
+    alerg = int(input('Quais são os produtos que você é alérgico? '))
+
+    if alerg == 1:
+        score += 1
+        alergias.append('ovos')
+    elif alerg == 2:
+        score += 2
+        alergias.append('amendoins')
+    elif alerg == 4:
+        score += 4
+        alergias.append('frutos do mar')
+    elif alerg == 8:
+        score += 8
+        alergias.append('morangos')
+    elif alerg == 16:
+        score += 16
+        alergias.append('tomates')
+    elif alerg == 32:
+        score += 32
+        alergias.append('chocolate')
+    elif alerg == 64:
+        score += 64
+        alergias.append('pólen')
+    elif alerg == 128:
+        score += 128
+        alergias.append('gatos')
+
+    continuar = input('Deseja adicionar mais alérgenos? (s/n) ').lower()
+    if continuar != 's':
+        break
+
+print('-'*50)
+print('=== Resultado do Diagnóstico ===')
+print('-'*50)
+
+if score == 0:
+    print("Nada alérgico")
+elif 0 < score <= 4:
+    print("Baixo nível de alergia")
+elif 5 <= score <= 32:
+    print("Médio nível de alergia")
+elif 33 <= score <= 64:
+    print("Alto nível de alergia")
+else:
+    print("Muito alto nível de alergia")
+
+print(f'Você é alérgico a: {", ".join(alergias)}')
+print(f'Seu escore total de alergias é: {score}')
