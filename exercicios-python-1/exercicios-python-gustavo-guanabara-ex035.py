@@ -87,7 +87,7 @@ modulo_ab = abs((ladoa - ladob))
 modulo_ac = abs((ladoa - ladoc))
 modulo_bc = abs((ladob - ladoc))
 if ladoa < ladob + ladoc and ladob < ladoa + ladoc and ladoc < ladoa + ladob:
-  print('Os valores fornecidos formam um triângulo')
+  print('Os valores fornecidos pelo usuário formam um triângulo')
 else:
-    print('Os valores fornecidos não formam um triângulo.')
+    print('Os valores fornecidos pelo usuário não formam um triângulo.')
 
