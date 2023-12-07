@@ -120,5 +120,5 @@ while aluno_escolhido.lower() != 'sair':
             break
     if not encontrado:
         print(f"\nAluno '{aluno_escolhido}' não encontrado.")
-    aluno_escolhido = input("\nDigite o nome do aluno para ver as notas individuais (ou 'sair' para encerrar): ")
+    aluno_escolhido = input("\nDigite o nome do aluno para ver as notas individuais dele (ou 'sair' para encerrar): ")
 
