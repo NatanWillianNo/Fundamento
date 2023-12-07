@@ -1,7 +1,6 @@
 from tinydb import TinyDB, Query
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
-from unidecode import unidecode
 import requests
 import os
 
@@ -48,7 +47,6 @@ def extrair_infos():
         categorias = artigo[0].find('div', class_='contenttree-widget relationchoice-field').text
         
 
-'''
 def inserir_bd(titulo, link): 
     env_dir = load_dotenv('.env_dir')
     DIR_DADOS_FINAL = os.getenv('DIR_DADOS_FINAL')
@@ -66,7 +64,8 @@ def inserir_bd(titulo, link):
     else:
         print('Já está na base!')
     # bd = TinyDB('{}/coleta.json'.format(DIR_DADOS_FINAL))
-'''
+
+
 def main():
     extrair_infos()
     # inserir_bd()
