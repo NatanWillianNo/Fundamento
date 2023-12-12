@@ -22,13 +22,6 @@ def acessar_pagina(url):
 #TODO Extrair data, horário e número da nota, parágrafos, categorias (OBS: Colocar com tag)
 #TODO Atualizar o banco com as informações acima 
 
-# Função para extrair informações de um artigo
-def acessar_pagina(url):
-    html = requests.get(url)
-    bs = BeautifulSoup(html.text, 'html.parser')
-    http_code = html.status_code
-    return bs, http_code
-
 # URL da página de onde as informações serão extraídas
 def extrair_infos():
     url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa?b_start:int=30"
@@ -46,9 +39,9 @@ def extrair_infos():
         
         horario = tag_article.find('i', class_='icon-hour').parent.text.strip()
         horario_lista.append(horario)
-        
-        numero_da_nota = tag_article.find('span', class_='subtitle').text.strip().replace('NOTA À IMPRENSA ', '')
-        numero_da_nota_lista.append(horario)
+    
+        numero_da_nota = tag_article.find('span', class_='subtitle').text.strip().lower().replace('nota à imprensa ', '').replace('n', 'N')
+        numero_da_nota_lista.append(numero_da_nota)  
         
         artigo = acessar_pagina(link)
         paragrafos = artigo[0].find('div', property='rnews:articleBody')
@@ -69,41 +62,51 @@ def extrair_infos():
         print('Número da Nota:', numero_da_nota)
         print('Parágrafo:', paragrafos_lista)
         print('Categoria:', categorias)
-        print('-' * 40)
+        print('-' * 100)
+
+        inserir_bd(titulo, link, data, horario, numero_da_nota, paragrafos_lista, categorias)
 
 # Função para criar o ambiente virtual
 def criar_ambiente_virtual():
     env_dir = load_dotenv('.env_dir')
     DIR_DADOS_FINAL = os.getenv('DIR_DADOS_FINAL')
+    print(DIR_DADOS_FINAL)
+
+    # Verificar se a variável de ambiente está configurada
+    if DIR_DADOS_FINAL is None:
+        print("A variável de ambiente DIR_DADOS_FINAL não está configurada.")
+        return
     os.makedirs(DIR_DADOS_FINAL, exist_ok=True)
     print(f"Ambiente virtual criado em {DIR_DADOS_FINAL}")
+    
+def inserir_bd(titulo, link, data, horario, numero_da_nota, paragrafos_lista, categorias):
+    load_dotenv('.env_dir')
+    DIR_DADOS_FINAL = os.getenv('DIR_DADOS_FINAL')
 
-
-# Função para inserir informações na base de dados
-def inserir_bd(titulo, link, data, horario, numero_da_nota, categorias, paragrafos_lista): 
     # Criação ou abertura do arquivo de base de dados
     bd = TinyDB(f'{DIR_DADOS_FINAL}/coleta.json', indent=4, ensure_ascii=False)
     buscar = Query()
     verificar_bd = bd.contains(buscar.link == link)
-    
+
     # Verifica se o link já está na base de dados
     if not verificar_bd:
         # Insere as informações na base de dados
         bd.insert({
-            'título': titulo,
-            'link': link,
-            'data': data,
-            'horario': horario,
-            'numero_da_nota': numero_da_nota,
-            'categorias': categorias,
-            'paragrafos_lista': paragrafos_lista
+            'Título': titulo,
+            'Link': link,
+            'Data': data,
+            'Horário': horario,
+            'Número da Nota': numero_da_nota,
+            'Parágrafos': paragrafos_lista,            
+            'Categorias': categorias
         })
+        print('Informações inseridas com sucesso!')
     else:
-        print('Já está na base!')
+        print('As informações já estão na base!')
 
 def main():
+    criar_ambiente_virtual()
     extrair_infos()
-    inserir_bd()
 
 if __name__ == '__main__':
     main()
