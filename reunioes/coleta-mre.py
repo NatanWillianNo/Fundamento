@@ -40,7 +40,7 @@ def extrair_infos():
         horario = tag_article.find('i', class_='icon-hour').parent.text.strip()
         horario_lista.append(horario)
     
-        numero_da_nota = tag_article.find('span', class_='subtitle').text.strip().lower().replace('nota à imprensa ', '').replace('n', 'N')
+        numero_da_nota = tag_article.find('span', class_='subtitle').text.strip().lower().replace('nota à imprensa', '').replace('n°', '').replace('nº', '').strip()
         numero_da_nota_lista.append(numero_da_nota)  
         
         artigo = acessar_pagina(link)
