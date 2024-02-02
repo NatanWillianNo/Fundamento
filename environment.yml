@@ -10,3 +10,4 @@ dependencies:
   - python-dotenv
   - requests
   - beautifulsoup4
+  - unidecode
