@@ -343,3 +343,90 @@ else:
 
 print(f'Você é alérgico a: {", ".join(alergias)}')
 print(f'Seu escore total de alergias é: {score}')
+
+# Programa de Lista de Compras com Subtotal
+
+# Inicializa uma lista vazia para armazenar os itens da compra
+lista_de_compras = []
+
+# Função para formatar o nome do item
+def formatar_nome(nome):
+    return nome.capitalize()
+
+# Função para adicionar um item à lista de compras com um valor
+def adicionar_item():
+    item = input("Digite o nome do item: ")
+    item_formatado = formatar_nome(item)
+    preco = input("Digite o preço do item: ").replace(',', '.')
+    preco = float(preco)
+    quantidade = float(input("Digite a quantidade desejada: "))
+    quantidade = math.floor(quantidade)  # Pega a parte inteira e arredonda sempre para baixo
+    subtotal = preco * quantidade
+    lista_de_compras.append({"item": item_formatado, "preco": preco, "quantidade": quantidade, "subtotal": subtotal})
+    print(f"{quantidade} {item_formatado}(s) foram adicionados à lista de compras por R${subtotal:.2f}.")
+
+# Função para calcular e exibir o subtotal e o valor total da lista de compras
+def calcular_subtotal_e_total():
+    subtotal_total = sum(item['subtotal'] for item in lista_de_compras)
+    valor_total = subtotal_total
+    print(f"\nSubtotal da Lista de Compras: R${subtotal_total:.2f}")
+    print(f"Valor total da Lista de Compras: R${valor_total:.2f}")
+
+# Função para exibir a lista de compras
+def exibir_lista():
+    print("\nLista de Compras:")
+    for i, item in enumerate(lista_de_compras, start=1):
+        print(f"{i}. {item['quantidade']} {item['item']}(s) por R${item['subtotal']:.2f} cada")
+
+# Função para retirar itens da lista
+def retirar_item():
+    exibir_lista()
+    escolha = input("Digite o número do item que deseja retirar ou '0' para cancelar: ")
+    
+    if escolha.isdigit():
+        index = int(escolha) - 1
+        if 0 <= index < len(lista_de_compras):
+            quantidade_retirar = float(input("Digite a quantidade que deseja retirar: "))
+            quantidade_atual = lista_de_compras[index]['quantidade']
+
+            if quantidade_retirar >= quantidade_atual:
+                del lista_de_compras[index]
+                print(f"Item removido completamente da lista.")
+            else:
+                lista_de_compras[index]['quantidade'] -= quantidade_retirar
+                lista_de_compras[index]['subtotal'] -= lista_de_compras[index]['preco'] * quantidade_retirar
+                print(f"{quantidade_retirar} {lista_de_compras[index]['item']}(s) retirado(s) da lista.")
+
+        else:
+            print("Número do item inválido. Nenhum item foi removido.")
+    else:
+        print("Entrada inválida. Nenhum item foi removido.")
+
+# Função principal
+def main():
+    print("Bem-vindo ao Programa de Lista de Compras!")
+
+    while True:
+        print("\nOpções:")
+        print("1. Adicionar item à lista")
+        print("2. Exibir lista de compras")
+        print("3. Calcular e exibir subtotal e valor total")
+        print("4. Retirar item da lista")
+        print("5. Sair")
+
+        escolha = input("Escolha uma opção (1/2/3/4/5): ")
+
+        if escolha == "1":
+            adicionar_item()
+        elif escolha == "2":
+            exibir_lista()
+        elif escolha == "3":
+            calcular_subtotal_e_total()
+        elif escolha == "4":
+            retirar_item()
+        elif escolha == "5":
+            print("Saindo do programa. Obrigado por usar a Lista de Compras!")
+            break
+        else:
+            print("Opção inválida. Por favor, escolha novamente.")
+
