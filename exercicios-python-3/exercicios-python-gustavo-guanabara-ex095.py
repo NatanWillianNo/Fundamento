@@ -126,3 +126,63 @@ if total_pessoas > 0:
     print(f"D) Lista de pessoas acima da média de idade: {acima_da_media}")
 else:
     print("Nenhuma pessoa cadastrada.")
+
+# Aprimore o exercício dos jogadores para que ele funcione com vários jogadores, incluindo um sistema de visualização de detalhes do aproveitamento de cada jogador.
+
+lista_jogadores = []
+while True:
+    print("\n1 - Cadastrar novo jogador")
+    print("2 - Visualizar detalhes de um jogador")
+    print("3 - Exibir ranking de jogadores por gols")
+    print("4 - Exibir ranking de jogadores por aproveitamento")
+    print("5 - Sair")
+    opcao = input("Escolha uma opção (1 a 5): ")
+    if opcao == '1':
+        nome = input("Digite o nome do jogador: ").upper()
+        partidas = int(input(f'Quantas partidas {nome} jogou: '))
+        cadastro_fut = {
+            'Nome': nome,
+            'Partidas': partidas,
+            'Gols': []
+        }
+        total_gols = 0
+        for partida in range(partidas):
+            gols_partida = int(input(f'Quantos gols {nome} fez na partida {partida + 1}: '))
+            cadastro_fut['Gols'].append(gols_partida)
+            total_gols += gols_partida
+        cadastro_fut['Total de Gols'] = total_gols
+        lista_jogadores.append(cadastro_fut)
+        print(f'\nJogador {nome} cadastrado com sucesso!')
+    elif opcao == '2':
+        nome_busca = input("Digite o nome do jogador que deseja visualizar: ").upper()
+        encontrado = False
+        for jogador in lista_jogadores:
+            if jogador['Nome'] == nome_busca:
+                encontrado = True
+                print('\nDetalhes do Jogador:')
+                print(f"Nome: {jogador['Nome']}")
+                print("Gols em cada partida:")
+                for partida, gols in enumerate(jogador['Gols'], start=1):
+                    print(f"Partida {partida}: {gols} gols")
+                print(f"Total de gols no campeonato: {jogador['Total de Gols']}")
+                aproveitamento = (jogador['Total de Gols'] / jogador['Partidas']) * 100 if jogador['Partidas'] > 0 else 0
+                print(f"Aproveitamento: {aproveitamento:.2f}%")
+                break
+        if not encontrado:
+            print(f"Jogador {nome_busca} não encontrado.")
+    elif opcao == '3':
+        ranking_gols = sorted(lista_jogadores, key=lambda x: x['Total de Gols'], reverse=True)
+        print("\nRanking de jogadores por gols:")
+        for i, jogador in enumerate(ranking_gols, start=1):
+            print(f"{i}. {jogador['Nome']} - {jogador['Total de Gols']} gols")
+    elif opcao == '4':
+        ranking_aproveitamento = sorted(lista_jogadores, key=lambda x: (x['Total de Gols'] / x['Partidas']) * 100 if x['Partidas'] > 0 else 0, reverse=True)
+        print("\nRanking de jogadores por aproveitamento:")
+        for i, jogador in enumerate(ranking_aproveitamento, start=1):
+            aproveitamento = (jogador['Total de Gols'] / jogador['Partidas']) * 100 if jogador['Partidas'] > 0 else 0
+            print(f"{i}. {jogador['Nome']} - {aproveitamento:.2f}%")
+    elif opcao == '5':
+        print("Saindo do programa. Até logo!")
+        break
+    else:
+        print("Opção inválida. Por favor, escolha entre 1 e 5.")
