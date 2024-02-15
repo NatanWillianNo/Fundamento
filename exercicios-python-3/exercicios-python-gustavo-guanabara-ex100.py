@@ -89,3 +89,4 @@ def somaPar(lista):
     print(f"Soma dos números pares: {soma}")
 numeros_sorteados = sorteia()
 somaPar(numeros_sorteados)
+
