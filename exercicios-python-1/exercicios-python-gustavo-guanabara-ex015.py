@@ -131,7 +131,7 @@ print('A temperatura de {} graus Celsius é igual a {} graus Fahrenheit'.format(
 print("Este programa calcula o preço a pagar pelo aluguel de um carro.")
 kilomt = float(input('Insira quantos kilômetros você andou com o carro?: '))
 preckm = float(input('Insira o valor por kilômetro do carro escolhido?: '))
-dias = int(input('Insira quantos dias você usou o carro?: ')
+dias = int(input('Insira quantos dias você usou o carro?: '))
 precdias = float(input('Insira o valor por dia: '))
 valortotcar = (precdias*dias) + (kilomt*preckm)
 print('Sabendo que o carro foi alugado por {} dias e andou {} km, e o valor por dia é R${} e por quilômetro rodado é R${}. O valor total do aluguel ficou R${:.2f}'.format(dias_aluguel, quilometros_rodados, valor_por_dia, valor_por_km, valor_total))

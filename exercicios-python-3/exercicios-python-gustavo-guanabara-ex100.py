@@ -1,92 +1,58 @@
-# Faça um programa que tenha uma função chamada área(), que receba as dimensões de um terreno retangular (largura e comprimento) e mostre a área do terreno.
+# Crie um programa que tenha uma função chamada voto() que vai receber como parâmetro o ano de nascimento de uma pessoa, retornando um valor literal indicando se uma pessoa tem voto NEGADO, OPCIONAL e OBRIGATÓRIO nas eleições.
+import time
+def fatorial(fatorando, show=False):
+    resultado = 1
+    if show:
+        print(f'Calculando o fatorial de {fatorando}...')
+    for i in range(1, fatorando + 1):
+        resultado *= i
+        if show:
+            print(f'{fatorando} x {i} = {resultado}')
+            time.sleep(0.5)  # Adiciona um atraso de 0.5 segundos entre as operações
+    return resultado
+num = int(input("Digite um número para calcular o fatorial: "))
+mostrar_processo = input("Deseja mostrar o processo de cálculo? (S/N): ").upper()
+if mostrar_processo == "S":
+    mostrar_processo = True
+else:
+    mostrar_processo = False
+print(f'O fatorial de {num} é {fatorial(num, mostrar_processo)}')
+
+# Crie um programa que tenha uma função fatorial() que receba dois parâmetros: o primeiro que indique o número a calcular e outro chamado show, que será um valor lógico (opcional) indicando se será mostrado ou não na tela o processo de cálculo do fatorial.
+import time
+def fatorial(fatorando, show=False):
+    resultado = 1
+    if show:
+        time.sleep(1)
+        print(f'Calculando o fatorial de {fatorando}...')
+    for i in range(1, fatorando + 1):
+        resultado *= i
+        if show:
+            print(f'{fatorando} x {i} = {resultado}')
+            time.sleep(1)  
+    return resultado
+num = int(input("Digite um número para calcular o fatorial: "))
+mostrar_processo = input("Deseja mostrar o processo de cálculo? (S/N): ").upper()
+if mostrar_processo == "S":
+    mostrar_processo = True
+else:
+    mostrar_processo = False
+print(f'O fatorial de {num} é {fatorial(num, mostrar_processo)}')
+
+# Faça um programa que tenha uma função chamada ficha(), que receba dois parâmetros opcionais: o nome de um jogador e quantos gols ele marcou. O programa deverá ser capaz de mostrar a ficha do jogador, mesmo que algum dado não tenha sido informado corretamente.
+
+def ficha(nome="Desconhecido", gols=0):
+    print(f"O jogador {nome} marcou {gols} gol(s).")
+
+nome_jogador = input("Digite o nome do jogador: ")
+gols_jogador = input("Digite a quantidade de gols marcados pelo jogador: ")
+
+# Verifica se foi inserido um valor para os gols
+if gols_jogador.isdigit():
+    gols_jogador = int(gols_jogador)
+    ficha(nome_jogador, gols_jogador)
+else:
+    ficha(nome_jogador)
 
 
-
-def area(largura, comprimento):
-    area_terreno = largura * comprimento
-    print(f"A área do terreno é: {area_terreno} metros quadrados.")
-largura = float(input("Informe a largura do terreno em metros: "))
-comprimento = float(input("Informe o comprimento do terreno em metros: "))
-area(largura, comprimento)
-
-# Faça um programa que tenha uma função chamada escreva(), que receba um texto qualquer como parâmetro e mostre uma mensagem com tamanho adaptável.
-'''
-Ex: escreva('Olá, Mundo!')
-Saída: ~~~~~~~~~
-       Olá, Mundo!
-       ~~~~~~~~~
-``
-'''
-
-def escreva(texto):
-    largura_linha = len(texto) + 4
-    linha = '~' * largura_linha
-    print(linha)
-    print(f' {texto} ')
-    print(linha)
-     
-texto_usuario = input('Digite o texto que deseja formatar: ')
-escreva(texto_usuario)
-
-# Faça um programa que tenha uma função chamada contador(), que receba três parâmetros: início, fim e passo. Seu programa tem que realizar três contagens através da função criada:
-# a) de 1 até 10, de 1 em 1
-# b) de 10 até 0, de 2 em 2
-# c) uma contagem personalizada
-def contador(i, f, p):
-    if p == 0:
-        print("O passo não pode ser zero.")
-        return
-    if i < f:
-        for i in range(i, f + 1, p):
-            print(i, end=' ')
-        print()
-    else:
-        for i in range(i, f - 1, -p):
-            print(i, end=' ')
-        print()
-print("Contagem de 1 até 10, de 1 em 1:")
-contador(1, 10, 1)
-print("\nContagem de 10 até 0, de 2 em 2:")
-contador(10, 0, 2)
-print("\nContagem personalizada:")
-inicio_personalizado = int(input("Digite o valor inicial: "))
-fim_personalizado = int(input("Digite o valor final: "))
-passo_personalizado = int(input("Digite o passo: "))
-contador(inicio_personalizado, fim_personalizado, passo_personalizado)
-
-# Faça um programa que tenha uma função chamada maior(), que receba vários parâmetros com valores inteiros. Seu programa tem que analisar todos os valores e dizer qual deles é o maior.
-def maior(*valores):
-    if len(valores) == 0:
-        print("Nenhum valor foi informado.")
-    else:
-        max_valor = max(valores)
-        print(f"O maior valor informado é: {max_valor}")
-valores = []
-while True:
-    valor = input("Digite um valor (ou 'sair' para encerrar): ")
-    if valor.lower() == 'sair':
-        break
-    elif valor.isdigit():
-        valores.append(int(valor))
-    else:
-        print("Por favor, digite um valor inteiro válido.")
-maior(*valores)
-
-# Faça um programa que tenha uma lista chamada números e duas funções chamadas sorteia() e somaPar(). A primeira função vai sortear 5 números e vai colocá-los dentro da lista e a segunda função vai mostrar a soma entre todos os valores pares sorteados pela função anterior.
-
-import random
-def sorteia():
-    numeros = []
-    for _ in range(5):
-        numeros.append(random.randint(1, 10))
-    print(f"Números sorteados: {numeros}")
-    return numeros
-def somaPar(lista):
-    soma = 0
-    for num in lista:
-        if num % 2 == 0:
-            soma += num
-    print(f"Soma dos números pares: {soma}")
-numeros_sorteados = sorteia()
-somaPar(numeros_sorteados)
 
