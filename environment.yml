@@ -13,3 +13,8 @@ dependencies:
   - unidecode
   - httpx
   - regex
+  - aiohttp     
+  - cchardet    
+  - brotlipy    
+  - cprofile    
+  - pstats      
