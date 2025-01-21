@@ -6,48 +6,55 @@ import random
 import csv
 
 # --- Configuração do CSV ---
-DATA_DIR = '/home/labri_natannoronha/codigo/Fundamento/dados'
+DATA_DIR = '/home/labri_natannoronha/codigo/Fundamento/dados'  # Substitua pelo seu diretório
 
 # Cria a pasta de dados se ela não existir
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
 CSV_FILE = os.path.join(DATA_DIR, 'mre_notas.csv')
-CSV_HEADER = ['TÍTULO DA TABELA', 'TÍTULO DA NOTA', 'LINK', 'DATA DE PUBLICAÇÃO', 'HORÁRIO DE PUBLICAÇÃO', 'DATA DE ATUALIZAÇÃO', 'HORÁRIO DE ATUALIZAÇÃO', 'ANO', 'NÚMERO DA NOTA', 'CATEGORIA']
+CSV_HEADER = ['TÍTULO DA TABELA', 'TÍTULO DA NOTA', 'LINK', 'DATA DE PUBLICAÇÃO', 'HORÁRIO DE PUBLICAÇÃO', 'DATA DE ATUALIZAÇÃO', 'HORÁRIO DE ATUALIZAÇÃO', 'ANO', 'MÊS', 'NÚMERO DA NOTA', 'CATEGORIA']
 
-# Cria o arquivo CSV e escreve o cabeçalho se ele não existir
-if not os.path.exists(CSV_FILE):
-    with open(CSV_FILE, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        writer.writerow(CSV_HEADER)
-
-# Função para acessar uma página web e retornar o HTML e o código de status HTTP
-def acessar_pagina(url):
+# --- Função para acessar uma página web e retornar o HTML e o código de status HTTP ---
+def acessar_pagina(url, tentativas=3, intervalo=30):
     """
     Acessa uma página web e retorna o objeto BeautifulSoup correspondente e o código de status HTTP.
+    Implementa retentativas em caso de erro 503 (Backend fetch failed).
 
     Args:
         url: A URL da página a ser acessada.
+        tentativas: O número máximo de tentativas de acesso (padrão: 3).
+        intervalo: O tempo de espera em segundos entre cada tentativa (padrão: 30).
 
     Returns:
         Um par (bs, http_code) onde bs é o objeto BeautifulSoup e http_code é o código de status HTTP.
-        Retorna (None, None) em caso de erro.
+        Retorna (None, None) em caso de erro após todas as tentativas.
     """
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36'
     }
-    try:
-        sleep(random.uniform(0.5, 1.5))
-        html = requests.get(url, headers=headers)
-        html.raise_for_status()
-        bs = BeautifulSoup(html.text, 'html.parser')
-        http_code = html.status_code
-        return bs, http_code
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao acessar a página: {e}")
-        return None, None
+    for tentativa in range(1, tentativas + 1):
+        try:
+            sleep(random.uniform(0.5, 1.5))
+            html = requests.get(url, headers=headers)
+            html.raise_for_status()
+            bs = BeautifulSoup(html.text, 'html.parser')
+            http_code = html.status_code
+            return bs, http_code
+        except requests.exceptions.RequestException as e:
+            if '503' in str(e):
+                print(f"Erro 503 ao acessar a página: {e}")
+                if tentativa < tentativas:
+                    print(f"Tentativa {tentativa + 1}/{tentativas} após {intervalo} segundos...")
+                    sleep(intervalo)
+                else:
+                    print(f"Falha ao acessar a página após {tentativas} tentativas.")
+            else:
+                print(f"Erro ao acessar a página: {e}")
+                break
+    return None, None
 
-# Função para adicionar dados ao CSV
+# --- Função para adicionar dados ao CSV ---
 def salvar_dados(nota):
     """
     Adiciona os dados de uma nota ao arquivo CSV.
@@ -57,9 +64,9 @@ def salvar_dados(nota):
     """
     with open(CSV_FILE, 'a', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
-        writer.writerow(['Notas à Imprensa - Itamaraty', nota['Título'], nota['Link'], nota['Data Publicação'], nota['Horário Publicação'], nota['Data Atualização'], nota['Horário Atualização'], nota['Ano'], nota['Número da Nota'], nota['Categoria']])
+        writer.writerow(['Notas à Imprensa - Itamaraty', nota['Título'], nota['Link'], nota['Data Publicação'], nota['Horário Publicação'], nota['Data Atualização'], nota['Horário Atualização'], nota['Ano'], nota['Mês'], nota['Número da Nota'], nota['Categoria']])
 
-# Função para extrair informações de uma página
+# --- Função para extrair informações de uma página ---
 def extrair_infos_pagina(url):
     """
     Extrai informações de uma página de notas à imprensa.
@@ -160,24 +167,34 @@ def extrair_infos_pagina(url):
             print(f"Erro ao separar data e horário de atualização: {atualizado_em}")
             data_atualizacao, horario_atualizacao = atualizado_em, ""
 
-        # Extrai o ano da string de data de publicação
+        # Extrai o ano e mês da string de data de publicação
         try:
-            ano = data_publicacao.split('/')[2][:4]
+            dia, mes, ano = data_publicacao.split('/')
+            ano = ano[:4]  # Garante que o ano tenha 4 dígitos
             if not ano.isdigit() or len(ano) != 4:
                 print(f"Ano inválido na data de publicação: {ano}.")
                 ano = nota_ano if nota_ano != "Ano não encontrado" else "Ano não encontrado"
-        except IndexError:
-            print(f"Erro ao extrair o ano da data de publicação: {data_publicacao}")
+        except (ValueError, IndexError):
+            print(f"Erro ao extrair o ano ou mês da data de publicação: {data_publicacao}")
             ano = nota_ano if nota_ano != "Ano não encontrado" else "Ano não encontrado"
+            mes = "Mês não encontrado"
 
-        # Extração dos parágrafos (mantida no código, mas não salva no CSV)
+        # Mapeamento de meses
+        meses = {
+            '01': 'Janeiro', '02': 'Fevereiro', '03': 'Março', '04': 'Abril',
+            '05': 'Maio', '06': 'Junho', '07': 'Julho', '08': 'Agosto',
+            '09': 'Setembro', '10': 'Outubro', '11': 'Novembro', '12': 'Dezembro'
+        }
+        mes_nome = meses.get(mes, "Mês inválido")
+
+        # Extração dos parágrafos (NÃO utilizada no CSV)
         paragrafos_element = artigo.find('div', property='rnews:articleBody')
         paragrafos_temp = [p.text.strip() for p in paragrafos_element.find_all('p')] if paragrafos_element else []
 
         categorias_element = artigo.find('div', class_='contenttree-widget relationchoice-field')
         categorias = categorias_element.text.strip() if categorias_element else "Sem categoria"
 
-        # Dicionário para armazenar os dados da nota
+        # --- Dicionário para armazenar os dados da nota ---
         nota = {
             'Título': titulo,
             'Link': link,
@@ -186,15 +203,16 @@ def extrair_infos_pagina(url):
             'Data Atualização': data_atualizacao,
             'Horário Atualização': horario_atualizacao,
             'Ano': ano,
+            'Mês': mes_nome,
             'Número da Nota': numero_da_nota,
             'Categoria': categorias,
-            'Parágrafos': paragrafos_temp
+            'Parágrafos': paragrafos_temp  # Não será salvo no CSV
         }
 
-        # Salva os dados no CSV (sem os parágrafos)
+        # --- Salva os dados no CSV ---
         salvar_dados(nota)
 
-        # Impressão das informações para verificação (opcional)
+        # --- Impressão das informações para verificação ---
         print('-' * 100)
         print('Título:', titulo)
         print('Link:', link)
@@ -203,19 +221,21 @@ def extrair_infos_pagina(url):
         print('Data Atualização:', data_atualizacao)
         print('Horário Atualização:', horario_atualizacao)
         print('Ano:', ano)
+        print('Mês:', mes_nome)
         print('Número da Nota:', numero_da_nota)
         print('Categoria:', categorias)
         print('-' * 100)
         sleep(1)
-    return True
 
-# Função principal para extrair informações
+    return True  # Indica que a extração da página foi bem-sucedida
+
+# --- Função principal para extrair informações ---
 def extrair_infos():
     """
     Função principal que extrai informações de todas as páginas de notas à imprensa do site do Itamaraty.
     """
     base_url = "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa?b_start:int="
-    max_offset = 5580
+    max_offset = 5580  # **VERIFIQUE** esse número no site
 
     continuar = True
     offset = 0
@@ -226,8 +246,23 @@ def extrair_infos():
         offset += 30
         sleep(5)  # Pausa para evitar sobrecarga (ajuste se necessário, confira o robots.txt)
 
+# --- Função principal (main) ---
 def main():
+    """
+    Função principal do script.
+    Apaga o arquivo CSV anterior e cria um novo com o cabeçalho, e então inicia a extração de dados.
+    """
+    # Apaga o arquivo CSV anterior, se existir
+    if os.path.exists(CSV_FILE):
+        os.remove(CSV_FILE)
+    # Cria um novo arquivo CSV e escreve o cabeçalho
+    with open(CSV_FILE, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(CSV_HEADER)
+
+    # Inicia a extração de informações das páginas do Itamaraty
     extrair_infos()
 
+# Executa o script
 if __name__ == '__main__':
     main()
