@@ -13,9 +13,21 @@ dependencies:
   - unidecode
   - httpx
   - regex
-  - aiohttp     
-  - cchardet    
-  - brotlipy    
-  - cprofile    
-  - pstats      
+  - aiohttp
+  - cchardet
+  - brotlipy
   - tqdm
+  - easyocr
+  - pymupdf
+  - docling
+  - pdfminer
+  - camelot-py
+  - tabula-py
+  - pytesseract 
+  - xhtml2pdf
+  - matplotlib
+  - r-turtlegraphics
+  - pip:
+    - layoutparser
+    - ocrmypdf
+    - pymupdf4llm

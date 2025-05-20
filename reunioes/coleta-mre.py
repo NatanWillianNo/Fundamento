@@ -306,7 +306,7 @@ def extrair_paginas(max_offset):
     for offset in tqdm(range(max_offset, -1, -30), desc="Extraindo páginas"):
         url = f"{base_url}{offset}"
         extrair_infos_pagina(url)
-        sleep(random.uniform(10, 20))
+        sleep(random.uniform(1, 5))
 
 def extrair_infos():
     """
@@ -315,7 +315,7 @@ def extrair_infos():
     max_offset = encontrar_ultima_pagina()
     if max_offset is None:
         print("Não foi possível encontrar a última página. Usando valor padrão.")
-        max_offset = 5580  # Valor padrão, ajuste se necessário
+        max_offset = 5700  # Valor padrão, ajuste se necessário
     extrair_paginas(max_offset)
 
 # --- Função principal (main) ---
